@@ -1,15 +1,16 @@
-fn solve(input: &str, top_n: usize) -> u32 {
-    let mut elves = input
+#![feature(binary_heap_into_iter_sorted)]
+use std::collections::BinaryHeap;
+
+pub fn solve(input: &str, top_n: usize) -> u32 {
+    let elves = input
         .split("\n\n")
         .map(|s| s.split("\n").flat_map(|x| x.parse::<u32>()).sum::<u32>())
-        .collect::<Vec<_>>();
-    elves.sort();
-    elves.reverse();
-    let answer: u32 = elves.iter().take(top_n).sum();
+        .collect::<BinaryHeap<_>>();
+    let answer: u32 = elves.into_iter_sorted().take(top_n).sum();
     answer
 }
 
-fn main() -> Result<(), anyhow::Error> {
+pub fn main() -> Result<(), anyhow::Error> {
     let input_data = std::fs::read_to_string("inputs/day1/input1")?;
     let answer = solve(&input_data, 1);
     println!("part 1: {answer:?}");
