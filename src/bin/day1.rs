@@ -1,6 +1,8 @@
 #![feature(binary_heap_into_iter_sorted)]
 use std::collections::BinaryHeap;
 
+use aoc22::get_input;
+
 pub fn solve(input: &str, top_n: usize) -> u32 {
     let elves = input
         .split("\n\n")
@@ -10,8 +12,10 @@ pub fn solve(input: &str, top_n: usize) -> u32 {
     answer
 }
 
-pub fn main() -> Result<(), anyhow::Error> {
-    let input_data = std::fs::read_to_string("inputs/day1/input1")?;
+#[tokio::main]
+pub async fn main() -> Result<(), anyhow::Error> {
+    let input_data = get_input!();
+    // let input_data = std::fs::read_to_string("inputs/day1/input")?;
     let answer = solve(&input_data, 1);
     println!("part 1: {answer:?}");
     let answer = solve(&input_data, 3);
