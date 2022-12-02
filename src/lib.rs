@@ -1,3 +1,4 @@
+pub mod rps;
 
 pub async fn download(day: &str) -> Result<String, anyhow::Error> {
     let path = std::path::PathBuf::from(format!("inputs/day{day}/input"));
